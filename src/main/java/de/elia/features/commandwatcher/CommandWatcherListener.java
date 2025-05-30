@@ -52,6 +52,10 @@ public class CommandWatcherListener implements Listener {
       if(!watchPlayer.hasPermission(BYPASS_PERMISSION)) {
         return;
       }
+
+      if (!CommandWatcherToggle.cwPlayers.contains(watchPlayer)) {
+        return;
+      }
       //check so that admin don't see their own commands
       if(sender == watchPlayer){
         return;

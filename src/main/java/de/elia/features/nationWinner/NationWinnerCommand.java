@@ -41,7 +41,7 @@ public class NationWinnerCommand extends Command {
     OfflinePlayer player = Bukkit.getOfflinePlayer(args[0]);
     List<OfflinePlayer> teamPlayers = Main.getDatabaseManager().getTeamPlayerList(Main.getDatabaseManager().getTeamID(player.getUniqueId().toString()));
     teamPlayers.forEach(teamPlayer -> {
-      Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "lp user " + teamPlayer.getName() + " permission settemp suffix.1000.ѹ true 1mo");
+      Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "lp user " + teamPlayer.getName() + " permission settemp suffix.1000.\uE214 true 1mo");
     });
     return true;
   }

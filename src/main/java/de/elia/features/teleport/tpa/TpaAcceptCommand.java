@@ -29,16 +29,22 @@ public class TpaAcceptCommand extends Command {
 
     switch (args.length){
       case 0:
-        //accept all open tpa and tpahere requests
-        boolean requested = false;
         // Handle TPA requests
+        if(TpaCommand.getPending().isEmpty()){
+          ErrorMessage.standard("Niemand möchte sich zu dir teleportieren oder dich zu sich teleportieren", player);
+          return false;
+        }
         for (Map.Entry<Player, Player> entry : TpaCommand.getPending().entrySet()) {
           if (entry.getValue().equals(player)) {
             entry.getKey().teleport(player);
             TpaCommand.getPending().remove(entry.getKey(), player);
             Message.standard("<grey>teleportiere...", entry.getKey());
-            requested = true;
+            return true;
           }
+        }
+        if(TpaCommand.getPendingHere().isEmpty()){
+          ErrorMessage.standard("Niemand möchte sich zu dir teleportieren oder dich zu sich teleportieren", player);
+          return false;
         }
         // Handle TPAHere requests
         for (Map.Entry<Player, Player> entry : TpaCommand.getPendingHere().entrySet()) {
@@ -46,11 +52,8 @@ public class TpaAcceptCommand extends Command {
             player.teleport(entry.getKey());
             TpaCommand.getPendingHere().remove(entry.getKey(), player);
             Message.standard("<grey>teleportiere...", player);
-            requested = true;
+            return true;
           }
-        }
-        if(!requested){
-          ErrorMessage.standard("Niemand möchte sich zu dir teleportieren oder dich zu sich teleportieren", player);
         }
         break;
       case 1:

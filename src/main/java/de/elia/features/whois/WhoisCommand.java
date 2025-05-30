@@ -20,6 +20,7 @@ import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -89,9 +90,10 @@ public class WhoisCommand extends Command {
                 Message.standard("<#FF9BDF>First Join<grey>: " + date, player);
 
                 try {
-                    String punishmentType = Main.getDatabaseManager().getPunishmentType(offlinePlayer.getName());
-                    if (punishmentType == null) {
-                        punishmentType = "keine";
+                  String punishmentTypes = "";
+                    ArrayList<String> punishmentType = Main.getDatabaseManager().getPunishmentType(offlinePlayer.getName());
+                    if (punishmentType.isEmpty()) {
+                        punishmentTypes = "keine";
                     }
                     Message.standard("<#FF9BDF>Punishment<grey>: " + punishmentType, player);
                 } catch (Exception e) {

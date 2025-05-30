@@ -1,5 +1,6 @@
 package de.elia.features.chat;
 
+import de.elia.Main;
 import de.elia.utils.Message;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -26,6 +27,10 @@ public class ChatListener implements Listener {
 
     //cancel default chatMessage
     event.setCancelled(true);
+
+    if(Main.getDatabaseManager().getPunishmentType(player.getName()).contains("MUTE")) {
+      return;
+    }
 
     //grab raw message & player prefix
     String rawMessage = event.getMessage();
