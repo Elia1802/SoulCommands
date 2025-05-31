@@ -39,28 +39,29 @@ public class DatabaseManager {
         }
     }
 
-    // Example: Get punishment type for a player
     public ArrayList<String> getPunishmentType(String playerName) {
       ArrayList<String> punishmentTypes = new ArrayList<>();
 
-        try {
-          String query = "SELECT punishmentType FROM Punishments WHERE name = \"" + playerName + "\"";
-          PreparedStatement statement = connection.prepareStatement(query);
-          ResultSet resultSet = statement.executeQuery();
+      try {
+        String query = "SELECT punishmentType FROM Punishments WHERE LOWER(name) = LOWER(?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, playerName);
 
-          while (resultSet.next()) {
-            try {
-              String pType = resultSet.getString("punishmentType");
-              punishmentTypes.add(pType);
-            } catch (IllegalArgumentException e) {
-              System.err.println("Ungültiger Punishment Type: " + e.getMessage());
-            }
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+          try {
+            String pType = resultSet.getString("punishmentType");
+            punishmentTypes.add(pType);
+            System.out.println("Punishment type: " + pType);
+          } catch (IllegalArgumentException e) {
+            System.err.println("Ungültiger Punishment Type: " + e.getMessage());
           }
-        } catch (SQLException e) {
-            System.err.println("Error retrieving punishment type: " + e.getMessage());
         }
+      } catch (SQLException e) {
+        System.err.println("Error retrieving punishment type: " + e.getMessage());
+      }
 
-        return punishmentTypes;
+      return punishmentTypes;
     }
 
     public String getIP(String playerName) {

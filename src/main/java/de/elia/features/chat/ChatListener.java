@@ -28,10 +28,10 @@ public class ChatListener implements Listener {
     //cancel default chatMessage
     event.setCancelled(true);
 
-    if(Main.getDatabaseManager().getPunishmentType(player.getName()).contains("MUTE")) {
+    if(Main.getDatabaseManager().getPunishmentType(player.getName()).contains("MUTE") || Main.getDatabaseManager().getPunishmentType(player.getName()).contains("TEMP_MUTE")) {
+      System.out.println("Muted");
       return;
     }
-
     //grab raw message & player prefix
     String rawMessage = event.getMessage();
     String luckpermsPrefix = getPrefix(player);
