@@ -40,6 +40,7 @@ public class DatabaseManager {
     }
 
     public ArrayList<String> getPunishmentType(String playerName) {
+      connect();
       ArrayList<String> punishmentTypes = new ArrayList<>();
 
       try {
@@ -65,6 +66,7 @@ public class DatabaseManager {
     }
 
     public String getIP(String playerName) {
+      connect();
       String ipaddr = null;
 
       try {
@@ -93,6 +95,7 @@ public class DatabaseManager {
     }
 
   public List<OfflinePlayer> getTeamPlayerList(String teamId) {
+    connect();
     List<OfflinePlayer> players = new ArrayList<>();
 
     try {
@@ -115,7 +118,8 @@ public class DatabaseManager {
   }
 
   public String getTeamID(String playerUUID) {
-    String teamID = null;
+    connect();
+      String teamID = null;
 
     try {
       String query = "SELECT teamID FROM BetterTeams_Players WHERE playerUUID = \"" + playerUUID + "\"";
