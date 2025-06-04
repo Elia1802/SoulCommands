@@ -44,8 +44,9 @@ public class DatabaseManager {
       ArrayList<String> punishmentTypes = new ArrayList<>();
 
       try {
+        String eliaQuery = "SELECT name, punishmentType FROM Punishments WHERE name = ?";
         String query = "SELECT punishmentType FROM Punishments WHERE LOWER(name) = LOWER(?)";
-        PreparedStatement statement = connection.prepareStatement(query);
+        PreparedStatement statement = connection.prepareStatement(eliaQuery);
         statement.setString(1, playerName);
 
         ResultSet resultSet = statement.executeQuery();
