@@ -1,6 +1,6 @@
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+  id("io.papermc.paperweight.userdev") version "2.0.0-beta.17"
   //id("xyz.jpenilla.run-paper") version "2.1.0" // Adds runServer and runMojangMappedServer tasks for testing
 }
 
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-  paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("1.21.5-R0.1-SNAPSHOT")
   implementation("de.elia.api:SoulLibrary:5.0.0")
   compileOnly("net.luckperms:api:5.4")
   // paperweight.foliaDevBundle("1.20-R0.1-SNAPSHOT")
